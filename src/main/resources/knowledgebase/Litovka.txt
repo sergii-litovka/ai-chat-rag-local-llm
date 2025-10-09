@@ -1,0 +1,104 @@
+
+SERGII LITOVKA
+SENIOR JAVA SOFTWARE ENGINEER
+Zurich | litovka.sergii@gmail.com | linkedin.com/in/sergii-litovka | github.com/sergii-litovka | +41797543459
+Summary
+
+Professional Software Engineer with over six years of experience as a Java Backend Developer and Full Stack Developer. Proficient in the entire software development lifecycle, including technical design, implementation, documentation, testing, estimation and deployment. Adept at modernizing legacy systems, enhancing system performance, AI/LLM integration, and delivering robust, high-quality software solutions. Expertise in Java 11+, the Spring ecosystem, microservices architecture, and various database technologies. Skilled in migrating monolithic applications to microservices and leveraging cloud technologies to improve scalability, resilience, and maintainability.
+Key Points
+Technical Proficiency: Proficient in the entire software development lifecycle. Expertise includes Java 11-17 with functional programming (Streams, Lambdas), Azure - AWS cloud services, Kafka for real-time data streaming and test-driven development approach, aligning with modern financial system requirements.
+Performance Optimization: Proven ability to enhance system performance, critical for real-time market data streaming, like optimization GC parameters,  leveraging off-heap memory (Apache Ignite), parallelizing data processing, adjusting Kafka performance (consumer group rebalancing, back-pressure, and partition misconfiguration etc.), query optimization.
+AI/LLM Integration: Architected and implemented production-ready AI systems using Spring AI framework, including custom RAG (Retrieval-Augmented Generation) pipelines with PostgreSQL vector stores and HNSW indexing for semantic search. Developed intelligent query expansion algorithms and modular advisor chain architectures for AI prompt processing, enabling context-aware conversational AI with persistent memory management.
+System Migration: Contributed to microservices migration by refactoring monolithic code into domain-driven microservices using Spring Boot, aligning bounded contexts with Kafka topics for event-driven, decoupled communication. Ensured data consistency with Kafka Schema Registry, supporting reliable market data streaming. Collaborated via pair-programming and automated CI/CD with Jenkins, monitoring performance with Prometheus and Grafana.
+Market Data Expertise: Contributed to developing real-time market data platforms, enhancing a Data as a Service Platform for financial data over two years. Enabled low-latency delivery of market and corporate data by integrating diverse vendor feeds, leveraging knowledge of financial asset classes, such as equities, fixed income, derivatives, and commodities.
+Team and Cultural Fit: Promotes best practices, automation, and collaborative development to foster a high-performing team culture. Mentored team members, sharing knowledge to foster engineering excellence and meet compliance needs in financial services.
+
+Professional Experience
+
+
+Senior Java Software Engineer
+Jan 2025 -  Jun 2025
+VectorSpace Labs
+Project - Designed and implemented custom RAG pipeline using Spring AI framework with PostgreSQL vector store for semantic document search. Implemented real-time streaming AI capabilities using reactive programming with Spring WebFlux. Developed intelligent query expansion advisor that enriches user queries with domain terminology to improve RAG retrieval accuracy. Created modular advisor chain architecture for AI prompt processing, including custom advisors for query expansion, RAG integration, and conversation memory management. Created fact-checking systems for hallucination detection. Established AI observability and monitoring frameworks with content filtering, response validation mechanisms, and enabled LLMs to interact with external systems through function calling.
+Tools and Technologies:
+AI/LLM Technologies: Spring AI, RAG, Ollama LLM, Vector Databases, Semantic Search, Prompt Engineering, Chat Memory Management, Query Expansion, HNSW Indexing, Async processing
+Tools: Java 21, Spring Boot, Spring AI, PostgreSQL with pgvector extension, Spring Data JPA, Lombok, Docker, Vector Embeddings, Semantic Search, Ollama, AI Advisors Chain Pattern, JUnit 5, Testcontainers
+
+Java Software Engineer
+Sep 2022 - Dec 2024
+EPAM Systems
+Client: Bridgewater Associates; FS - Asset management
+Project - Data as a Service Platform for Market and Corporate data assets. More than 2 years of experience in the finance domain, focusing on ETL, data analytics, distributed computations, and AWS cloud solutions.
+Skill - Designed and implemented new microservices and optimized legacy components using Spring Boot and Hibernate, resulting in a 15% improvement in data delivery performance and enhanced reliability for end-users.
+Tools and Technologies:
+Java 11-17, AWS Cloud (EC2, S3, Athena, Glue, State machines, Lambda, CloudWatch, RDS, Aurora, DynamoDB), Apache Ignite, Spring Boot, Docker, Snowflake, Sonar, Rundeck, Prometheus, Artifactory, Jenkins, HashiCorp Vault, Grafana, Gradle, Gitlab, PostgreSQL, Elasticsearch, Kibana, Liquibase
+
+Java Software Engineer
+Apr 2022 - Aug 2022
+EPAM Systems
+Client: Canadian Tire Corporation Limited
+Project - Around 1 year of experience in financial web systems and online retail & distribution (customer: Canadian Tire).
+Skill - Crafted a suite of RESTful APIs for a high-traffic e-commerce platform, supporting 5M+ hits per day. Participated in Kafka integration for real-time data streaming, increasing data throughput and analytical processing by 20%.
+Tools and Technologies:
+Azure Cloud, Azure Functions, Azure ADO, Azure Service Bus, Java 8, Java 11, Spring Boot, Hazelcast, LiquiBase, ActiveMQ, Docker, Maven, Gradle, Ant, JSP, REST, XML/XSD, jUnit, Hybris, JMS, Git, Jira, Confluence, Jenkins, Intellij IDEA, Sonar, NewRelic, Kibana, Veracode, MS SQL, Azure SQL, CosmoDB (NoSQL)
+
+Java Software Engineer
+Jan 2022 - Mar 2022
+EPAM Systems
+Client: Blackberry
+Project: Enterprise Mobile Management
+Skill - Optimized algorithmic efficiency of an inventory management system, resulting in a 10% improvement in processing time. Contributed to troubleshooting and debugging of Java applications, reducing system errors by 10%.
+Tools and Technologies:
+AWS, Java 8, Java 11, Spring Core, Spring Boot, Spring Security, Spring MVC, SOAP, JAX-RX (RestEasy), Flyway, Hibernate, Kafka, .NET 4.5, WCF, Scala, JavaScript, GWT, JSP Servlets, BouncyCastle, Certicom., IntelliJ IDEA, Eclipse IDE, Maven, Gradle, Git, GitExtensions, Gerrit, Jenkins, Nexus, Fiddler, MS Visual Studio, IntelliJ DotPeek, MS SQL Management Studio, FindBug, Sonar, Jira, Confluence, MS SQL, PostgreSQL
+
+Java Software Developer
+Jul 2021 - Dec 2021
+InTechSoft
+Project - Emergency Notification System
+Skill - Spearheaded the migration of legacy systems to Java 11 and Spring framework, achieving a 20% reduction in server costs and 15% improvement in application performance. Designed and executed a comprehensive unit testing strategy with JUnit and Mockito, reducing system bugs by 25% and improving code quality.
+Stack - Java 8-11, Oracle DB, JQuery, Payara
+
+Java Software Developer
+Dec 2020 - Jun 2021
+EXADEL INC.
+Project - Web application for insurance company chatting
+Skill - Drove the migration from a monolithic architecture to microservices using REST api, improving scalability and speeding up the feature deployment cycle by 25%. Contributed to the development of a new Java feature that increased the app's user accessibility compliance score by 15%. Planned, documented, and executed tests to ensure code changes met requirements and specifications.
+Stack: Java 8, Spring Boot, VueJs, MySQL, Maven
+
+Junior Java Software Developer
+Dec 2019 - Dec 2020
+BIT MEDIA E-SOLUTIONS GMBH
+Project - Web application for school administration
+Skill - Refactored and improved existing codebase, resulting in a 5% performance enhancement across Customer Relationship Management system.
+Stack: Java 8, Spring Web, Spring Data, JS, Oracle DB, Maven, Tomcat
+
+Education
+
+
+Duke University (Durham, North Carolina, USA)
+Graduation year 2020
+Java Programming and Software Engineering Fundamentals
+Certificate: https://www.coursera.org/account/accomplishments/specialization/certificate/AJHPYPZCPZ4E
+Kharkiv Petro Vasylenko National Technical University of Agriculture (Kharkiv, Ukraine)
+Graduation year 2011
+Technical Service Department, Doctor of Philosophy (PhD)
+Kharkiv National Automobile and Highway University (Kharkiv, Ukraine)
+Graduation year 2004
+Mechanical Faculty, Master of science
+
+Language
+
+
+English - professional
+German - beginner
+Ukrainian - native
+Russian - native
+
+Additional information
+
+
+IT Skills
+OOP principles, SOLID, and design patterns, Streams, Lambdas, Records, Sealed Classes, CompletableFuture, Spring Ecosystem & Frameworks, Microservices & Distributed Systems, Hibernate, GraphQL, Swagger/OpenAPI, Message Brokers (RabbitMQ, Kafka), SQL DB (PostgreSQL, Oracle), NoSQL DB (MongoDB), Liquibase, Query optimization, AWS Cloud (EC2, S3, Lambda), Azure cloud, Docker, Kubernetes/OpenShift, Terraform, Jenkins, GitHub Actions, GitLab CI/CD, Kafka, RabbitMQ, ActiveMQ, JUnit, Mockito, JMeter, SonarQube, Checkstyle, OAuth2, JWT, ELK (Elasticsearch, Logstash, Kibana), Prometheus, Grafana, Scrum/Kanban, JavaScript, TypeScript, VueJS, React.
+
+Soft Skills
+Ability to explain complex technical concepts, strong analytical thinking to break down complex problems, providing technical mentorship and knowledge sharing, keeping up with industry trends and best practices, working effectively within a cross-functional team, prioritizing tasks and managing workload efficiently, taking responsibility for code quality and project outcomes, empathy towards teammates and stakeholders, defending technical decisions with solid reasoning, understanding business goals and aligning technical solutions accordingly

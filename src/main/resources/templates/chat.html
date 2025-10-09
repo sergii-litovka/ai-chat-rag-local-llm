@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <title>Library Chatbot</title>
+  <link rel="stylesheet" type="text/css" href="/css/chat.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="/js/chat.js"></script>
+</head>
+<body class="comic-body">
+<div class="chat-container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <h1>Library Chatbot</h1>
+
+      <!-- Chat list -->
+      <div class="chat-list-wrapper">
+        <ul class="chat-list" id="chat-list">
+          <!-- Chat list will be populated by JavaScript -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- New chat form -->
+    <div class="sidebar-bottom">
+      <div class="new-chat-form" id="new-chat-form">
+        <input type="text" name="title" id="chat-title-input" placeholder="New chat" required autocomplete="off"/>
+        <button type="button" class="new-chat" id="new-chat-btn">New chat</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Chat main section -->
+  <main class="chat-main">
+
+    <div class="messages" id="messages">
+      <!-- Messages will be populated by JavaScript -->
+    </div>
+
+    <div class="input-area" id="input-area" style="display: none;">
+      <div class="input-bubble">
+        <label for="chat-input" class="sr-only">Ask</label>
+        <textarea id="chat-input" name="prompt" placeholder="Ask..." required></textarea>
+        <button type="button" id="send-button">SEND</button>
+      </div>
+    </div>
+
+    <!-- Welcome message when no chat is selected -->
+    <div class="welcome-message" id="welcome-message">
+      <div class="welcome-content">
+        <h2>Welcome to Library Chatbot</h2>
+        <p>Select a chat from the sidebar or create a new one to get started.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

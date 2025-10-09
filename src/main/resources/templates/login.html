@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Library Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="/css/chat.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
+</head>
+<body class="comic-body">
+    <div class="login-page">
+        <div class="login-container">
+            <h2 class="login-header">Login to Library Chatbot</h2>
+            
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            
+            <div th:if="${param.error}" class="error">
+                Invalid username or password.
+            </div>
+            
+            <div th:if="${param.logout}" class="success">
+                You have been logged out successfully.
+            </div>
+            
+            <div class="credentials-info">
+                <strong>Demo Credentials:</strong><br>
+                Username: <code>user</code><br>
+                Password: <code>password</code>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

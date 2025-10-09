@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16 # Using a pre-built image with pgvector
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: vectordb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    labels:
+      - "org.springframework.boot.service-connection=postgres"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/scripts:/docker-entrypoint-initdb.d
+    healthcheck: # Health check to ensure DB is ready
+      test: "pg_isready -U postgres -d vectordb"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
+  # Ollama service
+  ollama:
+    image: ollama/ollama:latest # Latest Ollama image
+    container_name: ollama-llm
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama # Persist Ollama models
+    entrypoint: >
+      /bin/sh -c "
+        ollama serve &
+        sleep 2 &&
+        ollama pull gemma3:4b-it-q4_K_M &&
+        ollama pull mxbai-embed-large &&
+        wait
+      "
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  ollama_data:
