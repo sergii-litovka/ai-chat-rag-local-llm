@@ -1,5 +1,6 @@
 # AI Chat Application
 
+##  Overview
 A sophisticated AI-powered chat application built with Spring Boot and Spring AI, featuring Retrieval Augmented Generation (RAG), conversation memory, and advanced query processing.
 
 ## 🚀 Features
