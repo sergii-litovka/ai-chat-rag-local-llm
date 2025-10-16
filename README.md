@@ -12,6 +12,7 @@ A sophisticated AI-powered chat application built with Spring Boot and Spring AI
 - **Query Expansion**: Intelligent query enhancement for better context understanding
 - **Vector Search**: Semantic search using pgvector with HNSW indexing
 - **Real-time Chat**: Web-based chat interface
+- **Streaming Responses (SSE)**: Token-by-token assistant responses via Server-Sent Events
 - **Multiple Chat Sessions**: Support for multiple concurrent conversations
 - **Document Loading**: Knowledge base management system
 
@@ -156,6 +157,37 @@ Content-Type: application/json
   "content": "User message content"
 }
 ```
+
+## 🔌 Streaming API (SSE)
+
+Stream assistant responses in real time using Server-Sent Events.
+
+- Endpoint: `GET /chat/{chatId}/stream?q=<prompt>`
+- Produces: `text/event-stream`
+- Events:
+  - default message: incremental text tokens in `data:`
+  - `error`: error details
+  - `complete`: final event with data `[DONE]`
+
+Example curl (session cookie required):
+
+```bash
+curl -N \
+  -H "Accept: text/event-stream" \
+  -H "Cookie: JSESSIONID=<your-session-id>" \
+  "http://localhost:8080/chat/1/stream?q=Hello"
+```
+
+Example JavaScript:
+
+```js
+const es = new EventSource('/chat/1/stream?q=Hello');
+es.onmessage = (e) => console.log('token:', e.data);
+es.addEventListener('error', e => es.close());
+es.addEventListener('complete', () => es.close());
+```
+
+See docs/API.md for full details.
 
 ## 🧠 AI Features
 

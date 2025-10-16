@@ -214,66 +214,80 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         try {
-            console.log('Making request to:', `/chat/${currentChatId}/entry`);
+            // Open SSE stream to receive assistant response
+            const streamUrl = `/chat/${currentChatId}/stream?q=${encodeURIComponent(prompt)}`;
+            console.log('Opening SSE stream:', streamUrl);
 
-            const response = await fetch(`/chat/${currentChatId}/entry`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-store',
-                    [csrfHeader]: csrfToken
-                },
-                body: JSON.stringify(requestData)
-            });
+            // We'll show typing indicator until the first chunk arrives
+            let assistantDiv = null;
+            let contentSpan = null;
+            let accumulated = '';
 
-            console.log('Response status:', response.status);
+            const es = new EventSource(streamUrl, { withCredentials: true });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            es.onmessage = (event) => {
+                // On first chunk, replace typing indicator with assistant message container
+                if (!assistantDiv) {
+                    hideTypingIndicator();
+                    assistantDiv = document.createElement('div');
+                    assistantDiv.className = 'message mentor';
+                    assistantDiv.innerHTML = `
+                        <img src="/images/mentor.png" alt="avatar">
+                        <div class="bubble"><span id="assistant-stream-content"></span></div>
+                    `;
+                    messagesContainer.appendChild(assistantDiv);
+                    contentSpan = assistantDiv.querySelector('#assistant-stream-content');
+                }
 
-            const updatedChat = await response.json();
-            console.log('Updated chat received:', updatedChat);
+                // Default message event carries token chunk (URL-encoded)
+                let chunk = event.data || '';
 
-            hideTypingIndicator();
+                // Decode the URL-encoded chunk to restore spaces
+                try {
+                    chunk = decodeURIComponent(chunk);
+                } catch (e) {
+                    console.error('Error decoding chunk:', e);
+                    // If decoding fails, use the chunk as-is
+                }
+                accumulated += chunk;
+                // During streaming, render plain text to preserve whitespace; finalize with markdown on complete
+                if (contentSpan) {
+                    contentSpan.textContent = accumulated;
+                }
+                scrollToBottom();
+            };
 
-            // Find the last AI message from the updated chat and add it
-            if (updatedChat.history && updatedChat.history.length > 0) {
-                console.log('Chat history length:', updatedChat.history.length);
-                const lastMessage = updatedChat.history[updatedChat.history.length - 1];
-                console.log('Last message:', lastMessage);
-
-                // Fix: role is a string, not an object
-                if (lastMessage.role === 'ASSISTANT') {
-                    console.log('Adding AI message to UI:', lastMessage.content);
-                    addMessageToUI('assistant', lastMessage.content);
-                } else {
-                    console.log('Last message is not from assistant, role:', lastMessage.role);
-                    // Maybe the AI response is the second-to-last message?
-                    if (updatedChat.history.length >= 2) {
-                        const secondToLastMessage = updatedChat.history[updatedChat.history.length - 2];
-                        console.log('Second to last message:', secondToLastMessage);
-                        if (secondToLastMessage.role === 'ASSISTANT') {
-                            console.log('Adding second-to-last AI message to UI:', secondToLastMessage.content);
-                            addMessageToUI('assistant', secondToLastMessage.content);
-                        }
+            es.addEventListener('complete', () => {
+                console.log('SSE complete');
+                es.close();
+                // On completion, render final markdown if available
+                if (assistantDiv) {
+                    const bubble = assistantDiv.querySelector('.bubble');
+                    if (typeof marked !== 'undefined') {
+                        bubble.innerHTML = marked.parse(accumulated);
+                    } else {
+                        const span = assistantDiv.querySelector('#assistant-stream-content');
+                        if (span) span.textContent = accumulated;
                     }
                 }
-            } else {
-                console.log('No history in updated chat');
-            }
+                hideTypingIndicator();
+                // Refresh chat list (e.g., title updates)
+                loadAllChats().catch(() => {});
+                sendButton.disabled = false;
+            });
 
-            // Refresh the chat list to keep it in sync
-            await loadAllChats();
+            es.addEventListener('error', (e) => {
+                console.error('SSE stream error:', e);
+                es.close();
+                hideTypingIndicator();
+                sendButton.disabled = false;
+            });
 
         } catch (error) {
             hideTypingIndicator();
             console.error('Error sending message:', error);
-
             // Add error message to UI
             addMessageToUI('assistant', 'Sorry, there was an error processing your message. Please try again.');
-        } finally {
-            // Re-enable send button
             sendButton.disabled = false;
         }
     }

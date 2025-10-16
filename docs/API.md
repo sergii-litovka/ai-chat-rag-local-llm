@@ -22,7 +22,11 @@ Error responses include detailed messages for debugging.
 
 ## Authentication
 
-Currently, the API allows cross-origin requests (`@CrossOrigin(origins = "*")`) and does not require authentication. This should be secured in production environments.
+The application uses form-based login and requires authentication for all API endpoints (except static assets). By default (dev), you can log in at `/login` with:
+- Username: `litovka`
+- Password: `password`
+
+For browser-based clients, authentication cookies will be sent automatically to the SSE endpoint. For programmatic access, configure a session-capable HTTP client that handles login and cookies.
 
 ---
 
@@ -230,6 +234,63 @@ curl -X POST http://localhost:8080/chat/1/entry \
   -H "Content-Type: application/json" \
   -d '{"content": "What is Spring AI and how does it work?"}'
 ```
+
+---
+
+## Streaming Responses (SSE)
+
+Stream assistant responses token-by-token using Server-Sent Events.
+
+- Endpoint: `GET /chat/{chatId}/stream`
+- Query parameters:
+  - `q` (required): user prompt to send
+- Produces: `text/event-stream`
+- Authentication: required (same session as the web app)
+
+The stream emits the following event types:
+- default event (no name): incremental text tokens in the `data:` field
+- `error`: error message
+- `complete`: a final event with data `[DONE]`
+
+Example curl (requires an authenticated session cookie):
+
+```bash
+# After logging in via browser, copy your session cookie and use it here
+curl -N \
+  -H "Accept: text/event-stream" \
+  -H "Cookie: JSESSIONID=<your-session-id>" \
+  "http://localhost:8080/chat/1/stream?q=Hello"
+```
+
+Example JavaScript:
+
+```js
+const chatId = 1;
+const prompt = "Hello";
+const url = `/chat/${chatId}/stream?q=${encodeURIComponent(prompt)}`;
+
+const es = new EventSource(url);
+
+es.onmessage = (event) => {
+  // event.data contains an incremental token (may be encoded)
+  console.log('token:', event.data);
+};
+
+es.addEventListener('error', (event) => {
+  console.error('stream error:', event.data);
+  es.close();
+});
+
+es.addEventListener('complete', () => {
+  console.log('stream complete');
+  es.close();
+});
+```
+
+Notes:
+- The server sends an `error` event and then closes the stream on failure.
+- A `complete` event with data `[DONE]` is sent when generation finishes.
+- For cross-thread security context propagation, the app configures `MODE_INHERITABLETHREADLOCAL`.
 
 ---
 

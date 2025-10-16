@@ -3,6 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Prevent horizontal window scroll */
 }
 
 body {
@@ -264,6 +265,7 @@ label {
 .messages {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden; /* Avoid horizontal scroll in messages area */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -316,6 +318,9 @@ label {
     position: relative;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    overflow-wrap: anywhere; /* aggressively wrap long unbroken sequences during streaming */
+    max-width: 100%;
+    box-sizing: border-box;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
@@ -354,7 +359,7 @@ label {
 
 /* Typing indicator */
 .typing-indicator .bubble {
-    background: #f3f4f6;
+    background: #fff;
     padding: 16px 20px;
 }
 
@@ -384,6 +389,27 @@ label {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.bubble img, .bubble video {
+    max-width: 100%;
+    height: auto;
+}
+
+.bubble table {
+    width: 100%;
+    max-width: 100%;
+    display: block; /* allow horizontal scrolling if needed inside bubble */
+    overflow-x: auto;
+}
+
+.bubble a {
+    word-break: break-word; /* wrap very long URLs */
+}
+
+/* Preserve whitespace for in-flight streaming content */
+.bubble #assistant-stream-content {
+    white-space: pre-wrap;
 }
 
 /* Markdown support in bubbles */
@@ -429,6 +455,9 @@ label {
     overflow-x: auto;
     margin: 0.5em 0;
     border: 1px solid #e5e7eb;
+    max-width: 100%;
+    white-space: pre-wrap; /* allow wrapping to avoid viewport overflow */
+    word-break: break-word;
 }
 
 .bubble pre code {

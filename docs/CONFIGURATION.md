@@ -393,3 +393,11 @@ fi
 ```
 
 This configuration documentation provides comprehensive guidance for setting up and tuning the AI Chat Application for different environments and use cases.
+
+
+### SSE and SecurityContext
+- The chat streaming endpoint uses Server-Sent Events at `GET /chat/{chatId}/stream`.
+- Authentication is required for this endpoint (same as the rest of the app). Because it is a GET request, CSRF protection does not block it.
+- To ensure the authenticated user is visible to downstream reactive callbacks (e.g., RAG document filtering), the application configures Spring Security to use `MODE_INHERITABLETHREADLOCAL` for `SecurityContextHolder` at startup. This allows SecurityContext to propagate into async/streaming threads.
+- Frontend uses same-origin EventSource with cookies. No CORS headers are required; the controller does not enable `@CrossOrigin("*")`.
+- If a user is not authenticated, the RAG enrichment is skipped, and the original prompt is sent without inserting any placeholder context.
